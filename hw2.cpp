@@ -159,6 +159,7 @@ int main(){
     
 
     // joining threads.
+    int max_of_rows = max(row1, row4);
     for (size_t i = 0; i < max_of_rows; i++)
     {
         if(i < row1)
