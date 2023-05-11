@@ -134,30 +134,29 @@ int main(){
     int *iret3 = new int[row1];
     pthread_t *threads_result = new pthread_t[row1];
     
-    int max_of_rows = max(row1, row3);
-    for (int i = 0; i < max_of_rows; i++)
+
+    // CREATING THREADS
+    for(int i = 0; i < row1; i++)
     {
-        if(i < row1) // creating threads of first addition.
-        {
-            int *arg = new int;
-            *arg = i;
-            iret[i] = pthread_create(threads_first_addition + i, NULL, first_addition, (void *) (arg));
-        }
+        int *arg = new int;
+        *arg = i;
+        iret[i] = pthread_create(threads_first_addition + i, NULL, first_addition, (void *) (arg));
+    }
 
-        if(i < row3) // creating threads of second addition.
-        {
-            int *arg = new int;
-            *arg = i;
-            iret2[i] = pthread_create(threads_second_addition + i, NULL, second_addition, (void *) (arg));
-        }
+    for(int i = 0; i < row3; i++)
+    {
+        int *arg = new int;
+        *arg = i;
+        iret2[i] = pthread_create(threads_second_addition + i, NULL, second_addition, (void *) (arg));
+    }
 
-        if(i < row1) // creating threads of result matrix.
-        {
+    for(int i = 0; i < row1; i++)
+    {
             int *arg = new int;
             *arg = i;
             iret3[i] = pthread_create(threads_result + i, NULL, apply_mult, (void *) (arg));
-        }
     }
+    
 
     // joining threads.
     for (size_t i = 0; i < max_of_rows; i++)
