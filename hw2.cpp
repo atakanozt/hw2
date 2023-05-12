@@ -305,6 +305,7 @@ void *second_addition(void *index_p)
         if(flag)
         {
             send_signal2(index, i); // send signal to all multp elements.
+            flag = false;
         }
     }
 
